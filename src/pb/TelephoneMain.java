@@ -1,0 +1,39 @@
+package pb;
+
+
+public class TelephoneMain {
+
+/*  Test cases:
+ * 	John Doe, 114 Market St, St Louis, MO, 63403, 6366435698
+ *  John E Doe, 324 Main St, St Charles, MO,63303, 8475390126
+ *  John Michael West Doe, 574 Pole ave, St. Peters, MO, 63333, 5628592375
+ */
+	public static void main(String[] args) {
+		
+		PhoneBook pb = new PhoneBook();
+//		pb.createEntries();
+		pb.loadEntries(); //load People Objects into PhoneBook People[]
+//
+//		/**********************************/
+//		MainMenu m = new MainMenu();
+//		m.run();
+
+		Person[] personas = pb.getPeople();
+		for (int i = 0; i < pb.getPeople().length; i++) {
+			
+			System.out.println(personas[i].toString());
+		}
+//		
+//		
+//		
+//		String name2 ="John E Doe, 324 Main St, St Charles, MO,63303, 8475390126";
+//		System.out.println(name2.substring(0, name2.indexOf(" ")));
+//		
+//		
+//		//System.out.println(name2.substring(name2.lastIndexOf(" "), name2.length())); //gets phone number
+//		String phoneLiteral = name2.substring(name2.lastIndexOf(" "), name2.length());
+//		phoneLiteral = phoneLiteral.strip()+"L"; //strips whitespace and appends L, now can be cast to type Long
+//		System.out.println(phoneLiteral);
+	}
+
+}
