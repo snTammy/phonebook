@@ -10,10 +10,7 @@ public class Address {
 	private String city;
 	private String state;
 	private int zipcode;
-	
-	public Address() {
-		//default constructor
-	}
+
 
 	public Address(String street, String city, String state, int zipcode) {
 		super();
@@ -21,6 +18,10 @@ public class Address {
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
+	}
+
+	public Address() {
+		//default constructor
 	}
 
 	public void updateAddress(Address a,String street, String city, String state, int zipcode ) {

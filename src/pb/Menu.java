@@ -51,10 +51,25 @@ public class Menu {
 		// print selection menu
 		System.out.println("Please enter an option to search the phonebook or -1 to exit");
 		System.out.println("*********************************************************");
-	
+		Scanner sc = new Scanner(System.in);
+		PhoneBook pb = new PhoneBook();
+		Person[] results = new Person[pb.getPeople().length];
+		
 		switch(opt) {
 		case 1 : System.out.println("You selected #1, search by first name \n");
 		// First name search
+		System.out.println("Please enter a name and press enter");
+		String nameToSearch = sc.next();
+		results = pb.search(nameToSearch);
+		for (int i = 0; i < pb.getPeople().length; i++) {
+			if(results[i]!=null) {
+				System.out.println(results[i].toString());
+				
+			}else {
+				System.out.println("No results match your query: " + nameToSearch);
+			}
+
+		}
 				break;
 				
 		case 2 : System.out.println("You selected #2, search by last name \n");

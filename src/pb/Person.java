@@ -13,49 +13,21 @@ public class Person {
 	private String fullName;
 
 	private Telephone telephone;
-	private long phoneNumber;
-	private String formattedTelephone;
+
 	private Address address;
 	
 	public Person() {
 		//default constructor
 	}
 	
-	public Person(String firstName, String lastName, Address address, long phoneNumber) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-	}
-	
+
 	public Person(String fullName, Address address, long phoneNumber) {
 		super();
 		this.fullName = fullName;
-		//if logic to break name into first last and middlename/middleInitial
-		//this.firstName = firstName;
-		//this.lastName = lastName;
 		this.address = address;
-		this.phoneNumber = phoneNumber;
+		this.telephone = new Telephone(phoneNumber);
 	}
-//	public Person(String firstName, String lastName, long phoneNum, Address address) {
-//		
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		//this.phoneNumber = phoneNumber;
-//		this.formattedTelephone = Telephone.printPhone(phoneNum);
-//		this.address = address;
-//	}
 
-//	public Person(String firstName, String lastName, Telephone tele, Address address) {
-//		
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		//this.phoneNumber = phoneNumber;
-//		this.formattedTelephone = new Telephone().printPhone(tele.getTelephoneNum());
-//		this.address = address;
-//	}
-	
 	public Person(String firstName, String lastName, Telephone tele, Address address) {
 		
 		this.firstName = firstName;
@@ -103,16 +75,16 @@ public class Person {
 		
 		return "Error in name";
 	}
-	public void assignData(String[] data) {
+	
+	public Person assignData(String[] data) {
 		//know length of [] data = 6
 		String phoneLiteral = data[5].substring(data[5].lastIndexOf(" "), data[5].length());
 		phoneLiteral = phoneLiteral.strip()+"L"; //strips whitespace and appends L, now can be cast to type Long
 		//System.out.println(phoneLiteral);
 		//this.phoneNumber = Long.parseLong(phoneLiteral);
 		
-		Telephone telephone = new Telephone();
-		telephone.setTelephoneNum(Long.parseLong(phoneLiteral));
-		
+		Telephone telephone = new Telephone(Long.parseLong(phoneLiteral));
+				
 		//handling for full name
 		Person p = new Person(data[0],new Address(data[1],data[2],data[3],Integer.parseInt(data[4])),Long.parseLong(phoneLiteral));
 		//or alternatively
@@ -125,7 +97,12 @@ public class Person {
 		//data[4] = zipcode
 		//data[5] = phone number
 		
+		return person;
+		
 	}
+	
+	
+	
 	public String getFullName() {
 		return fullName;
 	}
@@ -144,6 +121,15 @@ public class Person {
 		}
 		return this.getFullName()==((Person) obj).getFullName();
 	}
+	
+	public int compareTo(Person p) {
+		return this.fullName.compareTo(p.getFullName());
+	}
+	
+	public String getSearchString() {
+		return fullName + " " + address.toString() + " " 
+				+ telephone.toString();
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -156,12 +142,7 @@ public class Person {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public long getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+
 	public Address getAddress() {
 		return address;
 	}
@@ -170,7 +151,7 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "Name: "+ firstName +" "+   lastName + "\nPhone number: " + phoneNumber + "\n"
+		return "Name: "+ fullName + "\nPhone number: " + telephone.printPhone() + "\n"
 				+ address + "\n\n*****************************\n";
 	}
 

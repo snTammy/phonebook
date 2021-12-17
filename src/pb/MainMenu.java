@@ -5,7 +5,7 @@ import java.util.Scanner;
  * is a component of PhoneBook for Claim Academy J082021
  * author: Heather Tilley
  */
-public class MainMenu extends Menu{
+public class MainMenu {
 
 	public MainMenu() {
 		//default constructor
@@ -39,42 +39,66 @@ public class MainMenu extends Menu{
 		+ "\t4: Update an entry"
 		+ "\n5: Show all records");
 	}
-	public static void displaySubMenu(int opt) {
-		// print selection menu
-		System.out.println("Please enter an option to search the phonebook or -1 to exit");
+
+	public static void displayAddMenu() {
+		System.out.println("Please enter the person you'd like to add to the phonebook or -1 to exit");
 		System.out.println("*********************************************************");
-	
-		switch(opt) {
-		case 1 : System.out.println("You selected #1, search by first name \n");
-		// First name search
-				break;
-				
-		case 2 : System.out.println("You selected #2, search by last name \n");
-		// Last name search
-			break;
+		System.out.println("e.g. - John Doe, 114 Market St, St Louis, MO, 63403, 6366435698");
+		System.out.println("*********************************************************");
+		Person p = new Person();
+		Scanner sc = new Scanner(System.in);
+		String input = sc.next();
 		
-		case 3 : System.out.println("You selected #3, search by full name \n");
-		// Full name search: result should return array of Person Objects
-			break;
-		
-		case 4 : System.out.println("You selected #4, search by telephone number \n");
-		// telephone number search
-		break;
-		
-		case 5 : System.out.println("You selected #5, search by city");
-		// city search
-		break;
-		
-		case 6 : System.out.println("You selected #6, search by state");
-		// state search
-		break;
-		
-		default : System.out.println("Invalid input");
-		break;
+		PhoneBook pb = new PhoneBook();
+			
+		p.assignData(pb.readEntry(input));
 		
 	}
 		
-}
+	public static void displayRemoveMenu() {
+		System.out.println("Please enter the 10-digit phone number for the person you'd like to remove from the phonebook or -1 to exit");
+		System.out.println("*********************************************************");
+		System.out.println("e.g. - 6366435698");
+		System.out.println("*********************************************************");
+		Person p = new Person();
+		Scanner sc = new Scanner(System.in);
+		String input = sc.next();
+		
+		PhoneBook pb = new PhoneBook();
+			
+		p.assignData(pb.readEntry(input));
+		
+	}
+	public static void displaySearchMenu() {
+		// print selection menu
+		System.out.println("Please enter your search query to see if it exists in the phonebook or -1 to exit");
+		System.out.println("*********************************************************");
+		
+		PhoneBook pb = new PhoneBook();
+//		pb = PhoneBookFactory.getInstance();
+		//PhoneBookFactory pb = new PhoneBookFactory();
+		//pb.getInstance();
+		Scanner sc = new Scanner(System.in);
+		
+		Person[] results = new Person[pb.getPeople().length];
+		
+		
+		
+		System.out.println("Please enter a name and press enter");
+		String nameToSearch = sc.next();
+		results = pb.search(nameToSearch);
+		for (int i = 0; i < pb.getPeople().length; i++) {
+			if(results[i]!=null) {
+				System.out.println(results[i].toString());
+				
+			}else {
+				System.out.println("No results match your query: " + nameToSearch);
+			}
+
+		}
+			
+	}
+		
 	public static int readOption(Scanner sc) {
 		int choice =-2;
 		String option = null;
@@ -108,23 +132,23 @@ public class MainMenu extends Menu{
 		
 		switch(key) {
 		case 1 : System.out.println("You selected #1\n"); 
-		displaySubMenu(key);
+		displayAddMenu();
 		break;
 		
 		case 2 : System.out.println("You selected #2\n");
-		displaySubMenu(key);
+		displaySearchMenu();
 		break;
 		
 		case 3 : System.out.println("You selected #3\n");
-		displaySubMenu(key);
+		//displaySubMenu(key);
 		break;
 		
 		case 4 : System.out.println("You selected #4\n");
-		displaySubMenu(key);
+		//displaySubMenu(key);
 		break;
 		
 		case 5 : System.out.println("You selected #5\n");
-		displaySubMenu(key);
+		//displaySubMenu(key);
 		break;
 
 		

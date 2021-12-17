@@ -1,10 +1,11 @@
 package pb;
+import java.util.Arrays;
 
 public class Telephone {
 	private long telephoneNum;
 	
-	public Telephone() {
-		
+	public Telephone(long phoneNumber) {
+		this.telephoneNum = phoneNumber;
 	}
 
 	public long getTelephoneNum() {
@@ -15,9 +16,9 @@ public class Telephone {
 		this.telephoneNum = telephoneNum;
 	}
 
-	public static String printPhone(Long phoneNum) {
+	public String printPhone() {
 	    StringBuilder sb = new StringBuilder(15);
-	    StringBuilder temp = new StringBuilder(phoneNum.toString());
+	    StringBuilder temp = new StringBuilder(((Long) this.telephoneNum).toString());
 
 	    while (temp.length() < 10)
 	        temp.insert(0, "0");
@@ -40,4 +41,14 @@ public class Telephone {
 	public String toString() {
 		return "Telephone number: " + telephoneNum ;
 	}
+//	
+//	@Override
+//	public String compareTo(Telephone t) {
+//		//return t.telephoneNum - ((Long) this.telephoneNum));
+//		return t.telephoneNum.valueOf - this.telephoneNum.valueOf();
+//	}
+//	
+//	public Telephone[] sortPhoneNumbers(Telephone [] b) {
+//		return Arrays.sort(b);
+//	}
 }
