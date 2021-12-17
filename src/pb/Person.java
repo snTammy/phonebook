@@ -76,29 +76,18 @@ public class Person {
 		return "Error in name";
 	}
 	
+	// data[0] = full name, can vary
+	// data[1] = street address
+	// data[2] = city
+	// data[3] = state
+	// data[4] = zipcode
+	// data[5] = phone number
 	public Person assignData(String[] data) {
-		//know length of [] data = 6
-		String phoneLiteral = data[5].substring(data[5].lastIndexOf(" "), data[5].length());
-		phoneLiteral = phoneLiteral.strip()+"L"; //strips whitespace and appends L, now can be cast to type Long
-		//System.out.println(phoneLiteral);
-		//this.phoneNumber = Long.parseLong(phoneLiteral);
+		long phoneLong = Long.parseLong(data[5].strip());
+		Telephone telephone = new Telephone(phoneLong);
+		Address address = new Address(data[1], data[2], data[3], Integer.parseInt(data[4]));
 		
-		Telephone telephone = new Telephone(Long.parseLong(phoneLiteral));
-				
-		//handling for full name
-		Person p = new Person(data[0],new Address(data[1],data[2],data[3],Integer.parseInt(data[4])),Long.parseLong(phoneLiteral));
-		//or alternatively
-		Person person = new Person(data[0],new Address(data[1],data[2],data[3],Integer.parseInt(data[4])),telephone);
-		
-		//data[0] = full name, can vary
-		//data[1] = street address
-		//data[2] = city
-		//data[3] = state
-		//data[4] = zipcode
-		//data[5] = phone number
-		
-		return person;
-		
+		return new Person(data[0], address, phoneLong);
 	}
 	
 	
@@ -151,8 +140,9 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "Name: "+ fullName + "\nPhone number: " + telephone.printPhone() + "\n"
-				+ address + "\n\n*****************************\n";
+		return "\n" + fullName + "\nPhone number: " + telephone.printPhone() + "\n"
+				+ address 
+				+ "\n\n*****************************\n";
 	}
 
 	

@@ -14,44 +14,19 @@ public class TelephoneMain {
  */
 	public static void main(String[] args) {
 		
-		PhoneBook pb = new PhoneBook();
+		PhoneBook pb = PhoneBookFactory.getInstance();
 		pb.loadEntries(); //load People Objects into PhoneBook People[]
 
 		/**********************************/
 //		PhoneBookFactory pb = new PhoneBookFactory();
-//				pb.getInstance();
+//				pb.getInstance(); DO NOT USE KEYWORD NEW!!!
 		
 //		MainMenu m = new MainMenu();
 //		m.run();
-		displayAddMenu();
-		displaySearchMenu();
-		
-//		Address a1 = new Address();
-//		a1.setStreet("112 Lloyd Ave");
-//		a1.setCity("St Louis");
-//		a1.setState("MO");
-//		a1.setZipcode(63403);
-//		Person p1 = new Person("Kathleen Madigan", a1, 6364455698L);
-//		pb.addPerson(p1);
-//		
-//		Person[] personas = pb.getPeople();
-//		for (int i = 0; i < pb.getPeople().length; i++) {
-//			
-//			System.out.println(personas[i].toString());
-//		}
-//		
-//			Person[] updatedPb = new Person[pb.getPeople().length];
-//		//personas = pb.search("Kathleen");
-//		//personas = pb.search("John");
-//		personas = pb.search("6366435698");
-//		//but have 3 John(s)
-//		for (int i = 0; i < pb.getPeople().length; i++) {
-//			if(personas[i]!=null) {
-//				System.out.println(personas[i].toString());
-//				
-//			}
-//			
-//		}
+//		displayAddMenu();
+//		displaySearchMenu();
+//		displayUnsorted(); //this removes a user selected error, but indexes incorrectly
+
 
 	
 
@@ -62,16 +37,12 @@ public class TelephoneMain {
 		System.out.println("Please enter your search query to see if it exists in the phonebook or -1 to exit");
 		System.out.println("*********************************************************");
 		
-		PhoneBook pb = new PhoneBook();
-//		pb = PhoneBookFactory.getInstance();
-		//PhoneBookFactory pb = new PhoneBookFactory();
-		//pb.getInstance();
+		PhoneBook pb = PhoneBookFactory.getInstance();
+
 		Scanner sc = new Scanner(System.in);
 		
 		Person[] results = new Person[pb.getPeople().length];
-		
-		
-		
+				
 		System.out.println("Please enter a name and press enter");
 		String nameToSearch = sc.next();
 		results = pb.search(nameToSearch);
@@ -91,15 +62,76 @@ public class TelephoneMain {
 	public static void displayAddMenu() {
 		System.out.println("Please enter the person you'd like to add to the phonebook or -1 to exit");
 		System.out.println("*********************************************************");
-		System.out.println("e.g. - John Doe, 114 Market St, St Louis, MO, 63403, 6366435698");
+		System.out.println("e.g. - Jane Doe, 110 Market St, St Louis, MO, 63403, 6364445698");
 		System.out.println("*********************************************************");
 		Person p = new Person();
 		Scanner sc = new Scanner(System.in);
-		String input = sc.next();
+		String input = sc.nextLine();
 		
-		PhoneBook pb = new PhoneBook();
+		PhoneBook pb = PhoneBookFactory.getInstance();
 			
 		p.assignData(pb.readEntry(input));
 		pb.addPerson(p);
 	}
+	
+	
+	public static void displayUpdateMenu() {
+		System.out.println("Please enter the record you'd like to update in the phonebook or -1 to exit");
+		System.out.println("*********************************************************");
+		System.out.println("e.g. - Jane Doe, 110 Market St, St Louis, MO, 63403, 6364445698");
+		System.out.println("*********************************************************");
+		
+		Person p = new Person();
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		PhoneBook pb = PhoneBookFactory.getInstance();
+			
+		p.assignData(pb.readEntry(input));
+		pb.addPerson(p);
+	}
+	
+	public static void displayUnsorted() {
+		
+		PhoneBook pb = PhoneBookFactory.getInstance();
+		Scanner sc = new Scanner(System.in);
+		Person[] results = new Person[pb.getPeople().length];
+				
+		System.out.println("Please enter search criteria and press enter");
+		//should be able to delete by users phone number
+		//matches on phonenumber or any other portion of a record
+		String nameToSearch = sc.nextLine();
+		results = pb.search(nameToSearch);
+		
+		for (int i = 0; i < results.length; i++) {
+			if(results[i]!=null) {
+				System.out.println(i);
+				System.out.println(results[i].toString());
+				
+			}else {
+				System.out.println("No results match your query: " + nameToSearch);
+			}
+
+		}
+		
+		System.out.println("Please enter the index number for the record you desire removed then press enter");
+		int indexToRemove = sc.nextInt();
+		//get Person obj at this object's index as selected by user
+		results = pb.removePerson(results[indexToRemove], indexToRemove);
+		pb = PhoneBookFactory.getInstance(); //pull new instance after deletion event
+		System.out.println("Phonebook has been updated and now reflects: \n");
+		//System.out.println(pb.toString());//doesn't print correct result
+		
+//		for (int i = 0; i < results.length; i++) {
+//			if(results[i]!=null) {
+//				System.out.println(i);
+//				System.out.println(results[i].toString());
+//				
+//			}else {
+//				System.out.println("No results match your query: " + nameToSearch);
+//			}
+//
+//		}
+		
+	}
+	
 }

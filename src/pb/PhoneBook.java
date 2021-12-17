@@ -64,20 +64,21 @@ public class PhoneBook {
 	}
 
 	public Person[] search(String searchTerm) {
-		Person[] listOfPeople = new Person[getPeople().length];
-		int i=0;
-		for(Person p:getPeople()) {
-			
-			if(p.getSearchString().contains(searchTerm)) {
-				listOfPeople[i]=p; //put person in Person[]
-			}else {
-				Person[] list = new Person[getPeople().length];
-			}
-			i++;
-		}
-		
-		return listOfPeople;
+		  Person[] listOfPeople = new Person[0];
+		  for(Person p: getPeople()) {
+		   if(p.getSearchString().contains(searchTerm)) {
+		    listOfPeople = addToResults(listOfPeople, p);
+		   }
+		  }
+		  return listOfPeople;
+
 	}
+	 private Person[] addToResults(Person[] list, Person p){
+		  Person[] newList = new Person[list.length +1];
+		  System.arraycopy(list, 0, newList, 0, list.length);
+		  newList[list.length] = p;
+		  return newList;
+		 }
 	public Person[] addPerson(Person p) {
 		Person[] pb = getPeople();
 		
@@ -92,25 +93,34 @@ public class PhoneBook {
 		
 		return this.people;
 	}
-	public Person[] removePerson(Person p, int index) {
-		Person[] pb = getPeople();
-		
-		//create temp obj array of people, initialized to plus one
-		Person[] updatedPb = new Person[pb.length +1];
-		//Person[] updatedPb = java.util.Arrays.copyOfRange(pb, 0, pb.length);//getPeople obj
-		
-		System.arraycopy(getPeople(), 0, updatedPb, 1, pb.length);
-		updatedPb[0] = p; //insert at beginning
-	
-		setPeople(updatedPb);
+
+	public Person[] removePerson(Person p, int removeIndex) {
+		Person[] people = getPeople();
+		Person[] updatedPeople = new Person[people.length - 1];
+		int offset = 0;
+		for (int i = 0; i < people.length; i++) {
+			if (i == removeIndex) {
+				offset = 1;
+			} else {
+				updatedPeople[i - offset] = people[i];
+			}
+		}
+		setPeople(updatedPeople);
 		return this.people;
 	}
-	public Person[] updatePerson(Person p, int index) {
-		//getPeople obj
-		//get length of getPeople
-		//create temp obj array of people, initialized to plus one
-		//store reference to new person in last index
-		//return setPeople(temp[]);
+	
+	public Person[] updatePerson(Person p, int updateIndex) {
+		Person[] people = getPeople();
+		Person[] updatedPeople = new Person[people.length];
+		int offset = 0;
+		for (int i = 0; i < people.length; i++) {
+			if (i == updateIndex) {
+				offset = 1;
+			} else {
+				updatedPeople[i - offset] = people[i];
+			}
+		}
+		setPeople(updatedPeople);
 		return this.people;
 	}
 	public Person[] getPeople() {
@@ -123,7 +133,7 @@ public class PhoneBook {
 
 	@Override
 	public String toString() {
-		return "PhoneBook [people=" + Arrays.toString(people) + ", getPeople()=" + Arrays.toString(getPeople()) + "]";
+		return Arrays.toString(getPeople());
 	}
 	
 }
