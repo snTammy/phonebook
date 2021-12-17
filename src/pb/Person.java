@@ -36,8 +36,11 @@ public class Person {
 		this.address = address;
 	}
 	
-	public Person(String string, Address address2, Telephone t) {
-	// TODO Auto-generated constructor stub
+	public Person(String fullName, Address address2, Telephone t) {
+		super();
+		this.fullName = fullName;
+		this.address = address2;
+		this.telephone = new Telephone(t.getTelephoneNum());
 }
 	public static String[] readInput(String s) {
 		//take user input and return array of tokens to assign to a person object
@@ -88,6 +91,7 @@ public class Person {
 		Address address = new Address(data[1], data[2], data[3], Integer.parseInt(data[4]));
 		
 		return new Person(data[0], address, phoneLong);
+		//return new Person(data[0], address, telephone);
 	}
 	
 	

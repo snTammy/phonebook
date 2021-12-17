@@ -11,7 +11,7 @@ public class MainMenu {
 		//default constructor
 	}
 	
-	public static void run() {
+	public static void run1() {
 		// create scanner obj
 		Scanner sc = new Scanner(System.in);
 		// print welcome message

@@ -9,13 +9,13 @@ public class PhoneBook {
 		this.people = new Person[3];
 	}
 
+	// generate default person objects
+	/*
+	 * Test cases: John Doe, 114 Market St, St Louis, MO, 63403, 6366435698 
+	 * John E Doe, 324 Main St, St Charles, MO,63303, 8475390126 
+	 * John Michael West Doe, 574 Pole ave, St. Peters, MO, 63333, 5628592375
+	 */
 	public void loadEntries() {
-		// generate default person objects
-		/*
-		 * Test cases: John Doe, 114 Market St, St Louis, MO, 63403, 6366435698 John E
-		 * Doe, 324 Main St, St Charles, MO,63303, 8475390126 John Michael West Doe, 574
-		 * Pole ave, St. Peters, MO, 63333, 5628592375
-		 */
 
 		// John Doe, 114 Market St, St Louis, MO, 63403, 6366435698
 		Address a1 = new Address();
@@ -55,11 +55,14 @@ public class PhoneBook {
 		// String name ="John Doe, 114 Market St, St Louis, MO, 63403, 6366435698";
 		String[] tokens = data.split(", ");
 		int length = tokens.length;
-		System.out.println(length);
-		for (int i = 0; i < tokens.length; i++) {
-			String string = tokens[i];
-			System.out.println(tokens[i]);
-		}
+		
+//		System.out.println(length);
+//		for (int i = 0; i < tokens.length; i++) {
+//			String string = tokens[i];
+//			System.out.println(tokens[i]);
+//		}
+		
+		
 		return tokens;
 	}
 
@@ -94,20 +97,20 @@ public class PhoneBook {
 		return this.people;
 	}
 
-	public Person[] removePerson(Person p, int removeIndex) {
-		Person[] people = getPeople();
-		Person[] updatedPeople = new Person[people.length - 1];
-		int offset = 0;
-		for (int i = 0; i < people.length; i++) {
-			if (i == removeIndex) {
-				offset = 1;
-			} else {
-				updatedPeople[i - offset] = people[i];
-			}
-		}
-		setPeople(updatedPeople);
-		return this.people;
-	}
+	public Person[] removePerson(Person personToRemove) {
+		  Person[] people = getPeople();
+		  Person[] updatedPeople = new Person[people.length - 1];
+		  int offset = 0;
+		  for (int i = 0; i < people.length; i++) {
+		   if (people[i].equals(personToRemove)) {
+		    offset = 1;
+		   } else {
+		    updatedPeople[i - offset] = people[i];
+		   }
+		  }
+		  setPeople(updatedPeople);
+		  return this.people;
+		 }
 	
 	public Person[] updatePerson(Person p, int updateIndex) {
 		Person[] people = getPeople();
@@ -131,6 +134,32 @@ public class PhoneBook {
 		this.people = people;
 	}
 
+	public Person fetchPersonAtIndex(int i) {
+		Person[] people = getPeople();
+		//Person p = new Person();
+		Person p = people[i];
+		return p;
+	}
+	
+	public Person[] sortBook() {
+		Person[] people = getPeople();
+		Person[] updatedPeople = new Person[people.length];
+
+		for (int i = 0; i < people.length; i++) {
+
+			for (int j = 0; j < updatedPeople.length; j++) {
+				if(people[i].getFullName().compareTo(people[j].getFullName()) > 0){
+					Person temp = new Person();
+					people[i]=people[j];
+					people[j]=temp;
+				}
+			}
+		}
+		setPeople(updatedPeople);
+
+		return this.people;
+	}
+	
 	@Override
 	public String toString() {
 		return Arrays.toString(getPeople());
