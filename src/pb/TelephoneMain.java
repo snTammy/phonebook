@@ -60,7 +60,7 @@ public class TelephoneMain {
 			try {
 				System.out.println("Search records\n".toUpperCase());
 				displaySearchMenu();
-				
+				System.out.println(pb);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,7 +69,8 @@ public class TelephoneMain {
 		case 3:
 			try {
 				System.out.println("Delete record\n".toUpperCase());
-				displayUnsorted();
+				displayRemovePerson();
+				System.out.println(pb);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -90,7 +91,7 @@ public class TelephoneMain {
 				//TODO sort phonebook
 				//TODO print phonebook
 				pb.sortBook();
-				pb.toString();
+				System.out.println(pb);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -173,7 +174,7 @@ public class TelephoneMain {
 		pb.addPerson(p);
 	}
 	
-	public static void displayUnsorted() {
+	public static void displayRemovePerson() {
 		
 		PhoneBook pb = PhoneBookFactory.getInstance();
 		Scanner sc = new Scanner(System.in);

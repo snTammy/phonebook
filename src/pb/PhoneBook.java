@@ -57,11 +57,11 @@ public class PhoneBook {
 		String[] tokens = data.split(", ");
 		int length = tokens.length;
 		
-//		System.out.println(length);
-//		for (int i = 0; i < tokens.length; i++) {
-//			String string = tokens[i];
-//			System.out.println(tokens[i]);
-//		}
+		System.out.println(length);
+		for (int i = 0; i < tokens.length; i++) {
+			String string = tokens[i];
+			System.out.println(tokens[i]);
+		}
 		
 		
 		return tokens;
