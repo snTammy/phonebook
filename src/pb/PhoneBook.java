@@ -18,29 +18,30 @@ public class PhoneBook {
 	public void loadEntries() {
 
 		// John Doe, 114 Market St, St Louis, MO, 63403, 6366435698
-		Address a1 = new Address();
-		a1.setStreet("114 Market St");
-		a1.setCity("St Louis");
-		a1.setState("MO");
-		a1.setZipcode(63403);
+		Address a1 = new Address("114 Market St","St Louis","MO", 63403);
+//		Address a1 = new Address();
+//		a1.setStreet("114 Market St");
+//		a1.setCity("St Louis");
+//		a1.setState("MO");
+//		a1.setZipcode(63403);
 
 		Person p1 = new Person("John Doe", a1, 6366435698L);
 
 		// John E Doe, 324 Main St, St Charles, MO,63303, 8475390126
-		Address a2 = new Address();
-		a2.setStreet("324 Main St");
-		a2.setCity("St Charles");
-		a2.setState("MO");
-		a2.setZipcode(63303);
+		Address a2 = new Address("324 Main St","St Charles","MO", 63303);
+//		a2.setStreet("324 Main St");
+//		a2.setCity("St Charles");
+//		a2.setState("MO");
+//		a2.setZipcode(63303);
 
 		Person p2 = new Person("John E Doe", a2, 8475390126L);
 
 		// John Michael West Doe, 574 Pole ave, St. Peters, MO, 63333, 5628592375
-		Address a3 = new Address();
-		a3.setStreet("574 Pole ave");
-		a3.setCity("St. Peters");
-		a3.setState("MO");
-		a3.setZipcode(63333);
+		Address a3 = new Address("574 Pole ave","St. Peters","MO", 63333);
+//		a3.setStreet("574 Pole ave");
+//		a3.setCity("St. Peters");
+//		a3.setState("MO");
+//		a3.setZipcode(63333);
 
 		Person p3 = new Person("John Michael West Doe", a3, 5628592375L);
 
@@ -142,22 +143,12 @@ public class PhoneBook {
 	}
 	
 	public Person[] sortBook() {
+
 		Person[] people = getPeople();
-		Person[] updatedPeople = new Person[people.length];
-
-		for (int i = 0; i < people.length; i++) {
-
-			for (int j = 0; j < updatedPeople.length; j++) {
-				if(people[i].getFullName().compareTo(people[j].getFullName()) > 0){
-					Person temp = new Person();
-					people[i]=people[j];
-					people[j]=temp;
-				}
-			}
-		}
-		setPeople(updatedPeople);
-
+		Arrays.sort(people);
+		setPeople(people);
 		return this.people;
+
 	}
 	
 	@Override

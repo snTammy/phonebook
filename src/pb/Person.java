@@ -6,7 +6,7 @@ package pb;
  *  John E Doe, 324 Main St, St Charles, MO,63303, 8475390126
  *  John Michael West Doe, 574 Pole ave, St. Peters, MO, 63333, 5628592375
  */
-public class Person {
+public class Person implements Comparable<Person> {
 
 	private String firstName;
 	private String lastName;
@@ -115,9 +115,10 @@ public class Person {
 		return this.getFullName()==((Person) obj).getFullName();
 	}
 	
-	public int compareTo(Person p) {
-		return this.fullName.compareTo(p.getFullName());
-	}
+	@Override
+	 public int compareTo(Person p) {
+	  return this.fullName.compareTo(p.getFullName());
+	 }
 	
 	public String getSearchString() {
 		return fullName + " " + address.toString() + " " 
