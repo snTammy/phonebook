@@ -4,7 +4,7 @@ Claim Academy Project 1
 Write a program to simulate the actions of a phonebook only using arrays.
 This application is targeted at showcasing my ability to use only arrays as my data structure to complete this assignment. 
 
-![MainMenu](https://github.com/snTammy/phonebook/telephoneMainMenu.png)
+![MainMenu](https://github.com/snTammy/phonebook/blob/main/telephoneMainMenu.png)
 
 ## Requirements 
 
