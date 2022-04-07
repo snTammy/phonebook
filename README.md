@@ -33,3 +33,6 @@ This application is targeted at showcasing my ability to use only arrays as my d
 **Note: Test cases should work when copy and paste into the console as one entry (as is).
 
 Searching for John should return a list of all 3 records above, displaying the telephone number in this order (636)-453-8563.
+
+## Sample Output
+![ShowRecords](https://github.com/snTammy/phonebook/blob/main/showAllRecords.PNG)
